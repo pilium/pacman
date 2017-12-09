@@ -81,29 +81,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 const canvas = document.createElement('canvas')
 const ctx = canvas.getContext('2d')
 
+const image = new Image()
+image.src = 'img/pac.png'
+image.onload = () => {
+  window.addEventListener('resize', resizeCanvas, false)
+  resizeCanvas()
+}
+
 const enemy = Object(__WEBPACK_IMPORTED_MODULE_0__pers_enemy__["a" /* default */])()
 
-let data = {
+const data = {
     pscore: 0,
     gscore: 0
   }
   
-  const resizeCanvas = () => {
+const resizeCanvas = () => {
     canvas.height = window.innerHeight
     canvas.width = window.innerWidth
     data = Object(__WEBPACK_IMPORTED_MODULE_3__libs_render__["a" /* default */])(ctx, canvas, __WEBPACK_IMPORTED_MODULE_2__pers_player__["a" /* default */], enemy, __WEBPACK_IMPORTED_MODULE_1__pers_powerdot__["a" /* default */], data.pscore, data.gscore, image)
     requestAnimationFrame(resizeCanvas)
-  }
-  
-  document.body.appendChild(canvas)
+}
+
+document.body.appendChild(canvas)
 
 /***/ }),
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = ((x = 110, y = 310, pacX = 0, pacY = 0, size = 32,  moving = 0, dirX = 0, dirY = 0, speed = 5) => {
-    return { x, y, pacX, pacY, size, moving, dirX, dirY, speed }
+/* harmony default export */ __webpack_exports__["a"] = ((x = 110, y = 310, pacX = 0, pacY = 0, size = 32,  moving = 0, dirX = 0, dirY = 0, cutX = 32 , cutY = 32, speed = 5) => {
+    return { x, y, pacX, pacY, size, moving, cutX, cutY, dirX, dirY, speed }
   });
 
 /***/ }),
@@ -130,6 +137,8 @@ let data = {
     y: 30,
     pacX: 320, //пикселей до пакмана в спрайте 
     pacY: 0,
+    cutX: 32,
+    cutY: 32,
     size: 32, // размер иконки 
     speed: 5
   });
@@ -139,13 +148,16 @@ let data = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = ((ctx, canvas,player, enemy, powerdot, pscore , gscore) => {
+/* harmony default export */ __webpack_exports__["a"] = ((ctx, canvas,player, enemy, powerdot, pscore , gscore, image) => {
     ctx.fillStyle = 'black'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     ctx.font = '20px Verbana'
   
     ctx.fillStyle = 'white'
     ctx.fillText(`Человек: ${pscore} Сопливчик: ${gscore}`, 2, 20) 
+
+    ctx.drawImage(image, player.pacX, player.pacY, player.cutX, player.cutY, player.x, player.y, player.size, player.size)
+    ctx.drawImage(image, enemy.pacX, enemy.pacY, enemy.cutX, enemy.cutY, enemy.x, enemy.y, enemy.size, enemy.size)
 });
 
 /***/ })

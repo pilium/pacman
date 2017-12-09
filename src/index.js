@@ -6,6 +6,13 @@ import render from './libs/render'
 const canvas = document.createElement('canvas')
 const ctx = canvas.getContext('2d')
 
+const image = new Image()
+image.src = 'img/pac.png'
+image.onload = () => {
+  window.addEventListener('resize', resizeCanvas, false)
+  resizeCanvas()
+}
+
 const enemy = Enemy()
 
 let data = {
@@ -19,5 +26,5 @@ const resizeCanvas = () => {
     data = render(ctx, canvas, player, enemy, powerdot, data.pscore, data.gscore, image)
     requestAnimationFrame(resizeCanvas)
 }
-  
-  document.body.appendChild(canvas)
+
+document.body.appendChild(canvas)
