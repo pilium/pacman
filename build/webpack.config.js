@@ -1,3 +1,5 @@
+import path from 'path'
+
 export default {
     entry: {
       app: path.join(__dirname, '..', 'src/index.js')
