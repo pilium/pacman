@@ -90,11 +90,13 @@ image.onload = () => {
 
 const enemy = Object(__WEBPACK_IMPORTED_MODULE_0__pers_enemy__["a" /* default */])()
 
-const data = {
+let data = {
     pscore: 0,
     gscore: 0
   }
-  
+
+
+
 const resizeCanvas = () => {
     canvas.height = window.innerHeight
     canvas.width = window.innerWidth

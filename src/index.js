@@ -19,7 +19,17 @@ let data = {
     pscore: 0,
     gscore: 0
   }
-  
+
+const keyClick = {}
+document.addEventListener('keydown', (event) => {
+    keyClick[event.keyCode] = true  
+    move(keyClick, player, canvas)
+})
+
+document.addEventListener('keyup', (event) => {
+    delete keyClick[event.keyCode]  
+  })
+
 const resizeCanvas = () => {
     canvas.height = window.innerHeight
     canvas.width = window.innerWidth
